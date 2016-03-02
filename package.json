@@ -4,7 +4,7 @@
   "description": "Example test to integrate BrowserStack with CucumberJS",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/browserstack/cucumber-js-browserstack"
   },
   "scripts": {
     "test": "./node_modules/cucumber/bin/cucumber.js"
