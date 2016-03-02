@@ -1,5 +1,5 @@
 cucumberjs-browserstack
-=========
+=======================
 
 This repository provides information and helpful tweaks to run your Cucumber tests on the BrowserStack selenium cloud infrastructure.
 
