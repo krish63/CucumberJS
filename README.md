@@ -13,6 +13,8 @@ This repository provides information and helpful tweaks to run your Cucumber tes
 
 ###Run tests
 - To run your tests, run the command `npm test`
+- To run your tests in parallel, run the command `npm run test_parallel`
+- To run your tests with local, run the command `npm run test_local`
 
 ###Further Reading
 - [Cucumber](https://cucumber.io/docs/reference/javascript)
