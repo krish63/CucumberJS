@@ -1,6 +1,7 @@
 'use strict';
 
-var driver = require('./world.js').getDriver();
+var worldModule = require('./world.js');
+var driver = worldModule.getDriver();
 var fs = require('fs');
 var path = require('path');
 var sanitize = require("sanitize-filename");
@@ -23,10 +24,11 @@ var myHooks = function () {
   });
 
   this.registerHandler('AfterFeatures', function (event, callback) {
-    driver.quit();
-    callback();
+    driver.quit().then(function() {
+      worldModule.stopLocal();
+      callback();
+    });
   });
-
 };
 
 module.exports = myHooks;
