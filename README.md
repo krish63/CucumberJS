@@ -8,7 +8,7 @@ This repository provides information and helpful tweaks to run your Cucumber tes
 - Run `npm install`.
 
 ###Configuration
-- To run tests on the BrowserStack Infrastructure, replace your BS_USERNAME and BS_USERNAME in the support/world.js file.
+- To run tests on the BrowserStack Infrastructure, replace your BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY in the support/world.js file.
 - Add capabilities in the support/world.js file
 
 ###Run tests
