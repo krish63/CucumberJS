@@ -8,17 +8,15 @@
   },
   "scripts": {
     "test": "./node_modules/cucumber/bin/cucumber.js",
-    "test_parallel": "./node_modules/.bin/parallel-cucumber-js",
     "test_local": "TEST_TYPE=local ./node_modules/cucumber/bin/cucumber.js"
   },
   "devDependencies": {
-    "cucumber": "~0.4.4",
-    "selenium-webdriver": "~2.44.0",
-    "chai": "~1.10.0",
-    "sanitize-filename": "~1.1.1"
+    "chai": "^3.5.0",
+    "cucumber": "^0.10.2",
+    "sanitize-filename": "^1.6.0",
+    "selenium-webdriver": "^2.53.2"
   },
   "dependencies": {
-    "browserstack-local": "^0.1.0",
-    "parallel-cucumber": "^0.1.7"
+    "browserstack-local": "^0.1.0"
   }
 }

@@ -1,5 +1,5 @@
 cucumber-js-browserstack
-=======================
+========================
 
 This repository provides information and helpful tweaks to run your Cucumber tests on the BrowserStack selenium cloud infrastructure.
 
@@ -13,7 +13,6 @@ This repository provides information and helpful tweaks to run your Cucumber tes
 
 ###Run tests
 - To run your tests, run the command `npm test`
-- To run your tests in parallel, run the command `npm run test_parallel`
 - To run your tests with local, run the command `npm run test_local`
 
 ###Further Reading
