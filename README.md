@@ -1,5 +1,5 @@
 cucumber-js-browserstack
-=======================
+========================
 
 This repository provides information and helpful tweaks to run your Cucumber tests on the BrowserStack selenium cloud infrastructure.
 
@@ -8,12 +8,11 @@ This repository provides information and helpful tweaks to run your Cucumber tes
 - Run `npm install`.
 
 ###Configuration
-- To run tests on the BrowserStack Infrastructure, replace your BS_USERNAME and BS_USERNAME in the support/world.js file.
+- To run tests on the BrowserStack Infrastructure, replace your BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY in the support/world.js file.
 - Add capabilities in the support/world.js file
 
 ###Run tests
 - To run your tests, run the command `npm test`
-- To run your tests in parallel, run the command `npm run test_parallel`
 - To run your tests with local, run the command `npm run test_local`
 
 ###Further Reading

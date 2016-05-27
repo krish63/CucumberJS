@@ -1,6 +1,8 @@
+'use strict';
+
+var fs = require('fs');
 var webdriver = require('selenium-webdriver');
 var browserstack = require('browserstack-local');
-var fs = require('fs');
 
 var bs_local;
 
@@ -18,7 +20,7 @@ var BrowserStackDriver = function() {
     };
     bs_local.start(bs_local_args, function() {});
     isLocal = true;
-  }
+  }  
   return new webdriver.Builder().
     usingServer('http://hub.browserstack.com/wd/hub').
     withCapabilities({
@@ -36,18 +38,19 @@ var BrowserStackDriver = function() {
 
 var driver = BrowserStackDriver();
 
-var getDriver = function() {
-  return driver;
-};
-
 var stopLocal = function() {
   if(bs_local != null) {
     bs_local.stop();
   }
 }
 
-var World = function World(callback) {
+var getDriver = function() {
+  return driver;
+};
 
+var World = function World() {
+
+  var defaultTimeout = 20000;
   var screenshotPath = "screenshots";
 
   this.webdriver = webdriver;
@@ -56,8 +59,13 @@ var World = function World(callback) {
   if(!fs.existsSync(screenshotPath)) {
     fs.mkdirSync(screenshotPath);
   }
-
-  callback();
+  
+  this.waitFor = function(cssLocator, timeout) {
+    var waitTimeout = timeout || defaultTimeout;
+    return driver.wait(function() {
+      return driver.isElementPresent({ css: cssLocator });
+    }, waitTimeout);
+  };
 };
 
 module.exports.World = World;
