@@ -1,22 +1,20 @@
-cucumber-js-browserstack
-========================
+# cucumber-js-browserstack
 
-This repository provides information and helpful tweaks to run your Cucumber tests on the BrowserStack selenium cloud infrastructure.
+[Cucumber-JS](https://github.com/cucumber/cucumber-js) Integration with BrowserStack.
 
-###Setup
-- Add the cucumber and selenium-webdriver in package.json.
-- Run `npm install`.
+## Setup
 
-###Configuration
-- To run tests on the BrowserStack Infrastructure, replace your BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY in the support/world.js file.
-- Add capabilities in the support/world.js file
+- Clone the repo
+- Install dependencies `npm install`
+- Update `*.conf.js` files inside the `conf/` directory with your BrowserStack Username and Access Key. (These can be found in the [settings](https://www.browserstack.com/accounts/settings) section on BrowserStack accounts page)
+- Alternatively, you can export the environment variables for the Username and Access Key of your BrowserStack account. `export BROWSERSTACK_USERNAME=<browserstack-username> && export BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>`
 
-###Run tests
-- To run your tests, run the command `npm test`
-- To run your tests with local, run the command `npm run test_local`
+### Run the tests
 
-###Further Reading
-- [Cucumber](https://cucumber.io/docs/reference/javascript)
-- [BrowserStack documentation for Automate](https://www.browserstack.com/automate/node)
+- To run single test, run `npm run single`
+- To run parallel tests, run `npm run parallel`
+- To run local tests, run `npm run local`
 
-Happy Testing!
+### Notes
+
+- In order to test on different set of browsers, check out our [code generator](https://www.browserstack.com/automate/python#setting-os-and-browser)

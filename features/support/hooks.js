@@ -1,30 +1,58 @@
 'use strict';
 
-var worldModule = require('./world.js');
-var driver = worldModule.getDriver();
-var fs = require('fs');
-var path = require('path');
-var sanitize = require("sanitize-filename");
+var webdriver = require('selenium-webdriver');
+var browserstack = require('browserstack-local');
+
+var config_file = '../../conf/' + (process.env.CONFIG_FILE || 'single') + '.conf.js';
+var config = require(config_file).config;
+
+var username = process.env.BROWSERSTACK_USERNAME || config.user;
+var accessKey = process.env.BROWSERSTACK_ACCESS_KEY || config.key;
+
+var createBrowserStackSession = function(config, caps){
+  return new webdriver.Builder().
+    usingServer('http://'+config.server+'/wd/hub').
+    withCapabilities(caps).
+    build();
+}
 
 var myHooks = function () {
-  
-  this.After(function(scenario) {
-    if(scenario.isFailed()) {
-      this.driver.takeScreenshot().then(function(data){
-        var base64Data = data.replace(/^data:image\/png;base64,/,"");
-        fs.writeFile(path.join('screenshots', sanitize(scenario.getName() + ".png").replace(/ /g,"_")), base64Data, 'base64', function(err) {
-            if(err) console.log(err);
-        });
+  var bs_local = null;
+
+  this.Before(function (scenario, callback) {
+    var world = this;
+    console.log("TASK_ID", process.env.TASK_ID);
+    var task_id = parseInt(process.env.TASK_ID || 0);
+    var caps = config.capabilities[task_id];
+    caps['browserstack.user'] = username;
+    caps['browserstack.key'] = accessKey;
+
+    if(caps["browserstack.local"]){
+      // Code to start browserstack local before start of test and stop browserstack local after end of test
+      console.log("Connecting local");
+      bs_local = new browserstack.Local();
+      bs_local.start({'key': accessKey }, function(error) {
+        if (error) return console.log(error.red);
+        console.log('Connected. Now testing...');
+
+        world.driver = createBrowserStackSession(config, caps);
+        callback();
       });
     }
-    return this.driver.manage().deleteAllCookies();
+    else {
+      world.driver = createBrowserStackSession(config, caps);
+      callback();
+    }
   });
 
-  this.registerHandler('AfterFeatures', function (event) {
-    worldModule.stopLocal();
-    return driver.quit();
+  this.After(function(scenario, callback){
+    this.driver.quit().then(function(){
+      if(bs_local){
+        bs_local.stop(callback);
+      }
+      else callback();
+    });
   });
-
 };
 
 module.exports = myHooks;

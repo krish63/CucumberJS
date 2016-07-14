@@ -1,32 +1,32 @@
 'use strict';
 
-var expect = require('chai').expect;
+var assert = require('cucumber-assert');
 var webdriver = require('selenium-webdriver');
 
 module.exports = function() {
-  this.World = require('../support/world.js').World;
 
-  this.When(/^I search Google for "([^"]*)"$/, function (searchQuery, next) {
-    this.driver.get('http://www.google.com');
+  this.When(/^I type query as "([^"]*)"$/, function (searchQuery, next) {
+    this.driver.get('https://www.google.com/ncr');
     this.driver.findElement({ name: 'q' })
-      .sendKeys(searchQuery);
+      .sendKeys(searchQuery + '\n').then(next);
+  });
+
+  this.Then(/^I submit$/, function (next) {
     var self = this;
-    var waitTimeout = 60000;
     this.driver.findElement({ name: 'btnG' })
       .click()
       .then(function() {
         self.driver.wait(function () {
           return self.driver.isElementPresent(webdriver.By.id("top_nav"));
-        }, waitTimeout);
+        }, 5000);
         next();
       });
   });
 
-  this.Then(/^the title should contain "([^"]*)"$/, function (titleMatch, next) {
+  this.Then(/^I should see title "([^"]*)"$/, function (titleMatch, next) {
     this.driver.getTitle()
-    .then(function(title) {
-          expect(title).to.contain(titleMatch);
-          next();
-    });
+      .then(function(title) {
+        assert.equal(title, titleMatch, next, 'Expected title to be ' + titleMatch);
+      });
   });
 };
