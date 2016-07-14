@@ -21,7 +21,6 @@ var myHooks = function () {
 
   this.Before(function (scenario, callback) {
     var world = this;
-    console.log("TASK_ID", process.env.TASK_ID);
     var task_id = parseInt(process.env.TASK_ID || 0);
     var caps = config.capabilities[task_id];
     caps['browserstack.user'] = username;
