@@ -28,11 +28,9 @@ var myHooks = function () {
 
     if(caps["browserstack.local"]){
       // Code to start browserstack local before start of test and stop browserstack local after end of test
-      console.log("Connecting local");
       bs_local = new browserstack.Local();
       bs_local.start({'key': accessKey }, function(error) {
         if (error) return console.log(error.red);
-        console.log('Connected. Now testing...');
 
         world.driver = createBrowserStackSession(config, caps);
         callback();
