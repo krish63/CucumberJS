@@ -1,22 +1,34 @@
-cucumber-js-browserstack
-========================
+# cucumber-js-browserstack
 
-This repository provides information and helpful tweaks to run your Cucumber tests on the BrowserStack selenium cloud infrastructure.
+[Cucumber-JS](https://github.com/cucumber/cucumber-js) Integration with BrowserStack.
 
-###Setup
-- Add the cucumber and selenium-webdriver in package.json.
-- Run `npm install`.
+![BrowserStack Logo](https://d98b8t1nnulk5.cloudfront.net/production/images/layout/logo-header.png?1469004780)
 
-###Configuration
-- To run tests on the BrowserStack Infrastructure, replace your BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY in the support/world.js file.
-- Add capabilities in the support/world.js file
+<img src = "https://cucumber.io/images/cucumber-logo.svg" height = "100">
 
-###Run tests
-- To run your tests, run the command `npm test`
-- To run your tests with local, run the command `npm run test_local`
 
-###Further Reading
-- [Cucumber](https://cucumber.io/docs/reference/javascript)
-- [BrowserStack documentation for Automate](https://www.browserstack.com/automate/node)
+## Setup
+* Clone the repo
+* Install dependencies `npm install`
+* Update `*.conf.js` files inside the `conf/` directory with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings)
 
-Happy Testing!
+## Running your tests
+* To run a single test, run `npm run single`
+* To run parallel tests, run `npm run parallel`
+* To run local tests, run `npm run local`
+
+## Notes
+* You can view your test results on the [BrowserStack Automate dashboard](https://www.browserstack.com/automate)
+* To test on a different set of browsers, check out our [platform configurator](https://www.browserstack.com/automate/node#setting-os-and-browser)
+* You can export the environment variables for the Username and Access Key of your BrowserStack account
+  
+  ```
+  export BROWSERSTACK_USERNAME=<browserstack-username> &&
+  export BROWSERSTACK_ACCESS_KEY=<browserstack-access-key>
+  ```
+  
+## Additional Resources
+* [Documentation for writing Automate test scripts in Node](https://www.browserstack.com/automate/node)
+* [Customizing your tests on BrowserStack](https://www.browserstack.com/automate/capabilities)
+* [Browsers & mobile devices for selenium testing on BrowserStack](https://www.browserstack.com/list-of-browsers-and-platforms?product=automate)
+* [Using REST API to access information about your tests via the command-line interface](https://www.browserstack.com/automate/rest-api)
